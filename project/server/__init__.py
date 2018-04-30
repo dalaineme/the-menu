@@ -7,6 +7,8 @@ from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flasgger import Swagger
+
 
 APP = Flask(__name__)
 CORS(APP)
@@ -19,6 +21,7 @@ APP.config.from_object(APP_SETTINGS)
 
 BCRYPT = Bcrypt(APP)
 DB = SQLAlchemy(APP)
+SWAGGER = Swagger(APP)
 
 from project.server.auth.views import AUTH_BLUEPRINT  # nopep8  # pylint: disable=C0413
 

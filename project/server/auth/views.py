@@ -11,7 +11,9 @@ class RegisterAPI(MethodView):
     """User Registration resource"""
 
     def get(self):
-        """Get users"""
+        """
+        file: documentation/colors.yml
+        """
         return jsonify({'message': 'hello world'}), 200
 
 
