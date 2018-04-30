@@ -4,7 +4,7 @@
 import os
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 POSTGRES_LOCAL_BASE = 'postgresql://postgres:password@localhost/'
-DATABASE_NAME = 'buy_gari'
+DATABASE_NAME = 'the_menu'
 
 
 class BaseConfig(object):  # pylint: disable=too-few-public-methods
