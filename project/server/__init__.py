@@ -20,9 +20,6 @@ APP.config.from_object(APP_SETTINGS)
 BCRYPT = Bcrypt(APP)
 DB = SQLAlchemy(APP)
 
-try:
-    from project.server.auth.views import AUTH_BLUEPRINT
-except ImportError:
-    print('import error')
+from project.server.auth.views import AUTH_BLUEPRINT  # nopep8  # pylint: disable=C0413
 
 APP.register_blueprint(AUTH_BLUEPRINT)
