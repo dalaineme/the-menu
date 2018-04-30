@@ -19,3 +19,10 @@ APP.config.from_object(APP_SETTINGS)
 
 BCRYPT = Bcrypt(APP)
 DB = SQLAlchemy(APP)
+
+try:
+    from project.server.auth.views import AUTH_BLUEPRINT
+except ImportError:
+    print('import error')
+
+APP.register_blueprint(AUTH_BLUEPRINT)
