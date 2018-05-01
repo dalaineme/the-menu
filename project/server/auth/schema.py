@@ -6,7 +6,7 @@ from marshmallow_validators.wtforms import from_wtforms
 from wtforms.validators import Length, Regexp
 from project.server.auth.models import User
 
-PASS_REG = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]"
+PASS_REG = r"^(?=.*\d)(?=.*[a-zA-Z]).{8,20}$"
 
 
 class UserSchema(Schema):
