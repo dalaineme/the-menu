@@ -7,7 +7,7 @@ from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from flasgger import Swagger
+from flasgger import Swagger, APISpec
 
 
 APP = Flask(__name__)
@@ -21,7 +21,23 @@ APP.config.from_object(APP_SETTINGS)
 
 BCRYPT = Bcrypt(APP)
 DB = SQLAlchemy(APP)
-SWAGGER = Swagger(APP)
+SWAG = Swagger(
+    APP,
+    template={
+        "openapi": "3.0.0",
+        "info": {
+            "title": "The Menu API - Docs",
+            "version": "1.0",
+        },
+        "consumes": [
+            "application/x-www-form-urlencoded",
+        ],
+        "produces": [
+            "application/json",
+        ],
+    },
+)
+
 
 from project.server.auth.views import AUTH_BLUEPRINT  # nopep8  # pylint: disable=C0413
 

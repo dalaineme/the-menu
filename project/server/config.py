@@ -13,6 +13,10 @@ class BaseConfig(object):  # pylint: disable=too-few-public-methods
     DEBUG = False
     BCRYPT_LOG_ROUNDS = 13
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SWAGGER = {
+        "title": "The Menu API Docs",
+        "uiversion": 2,
+    }
 
 
 class DevelopmentConfig(BaseConfig):  # pylint: disable=too-few-public-methods
