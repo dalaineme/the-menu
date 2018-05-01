@@ -3,10 +3,14 @@
 
 from flask import Blueprint, request, make_response, jsonify
 from flask.views import MethodView
+from marshmallow import ValidationError
 from project.server import DB
 from project.server.auth.models import User
+from project.server.auth.schema import UserSchema
 
 AUTH_BLUEPRINT = Blueprint('auth', __name__, url_prefix='/v1/auth')
+
+USER_SCHEMA = UserSchema()
 
 
 class RegisterAPI(MethodView):
@@ -18,12 +22,33 @@ class RegisterAPI(MethodView):
         """
         # get the post data
         post_data = request.get_json()
-        # check if user already exists
+
+        # check for no input i.e. {}
+        if not post_data:
+            response_object = {
+                'status': 'fail',
+                'message': 'No input data provided.'
+            }
+            return make_response(jsonify(response_object)), 400
+        # load input to the marshmallow schema
+        try:
+            USER_SCHEMA.load(post_data)
+
+        # return error object case there is any
+        except ValidationError as err:
+            response_object = {
+                'status': 'fail',
+                'message': 'Validation errors.',
+                'errors': err.messages
+            }
+            return make_response(jsonify(response_object)), 422
+
+        # if no validation errors
+        # check if user already exists - check their email address
         user = User.query.filter_by(email=post_data.get('email')).first()
         if not user:
 
             user = User(
-                user_level=2,
                 first_name=post_data.get('first_name'),
                 last_name=post_data.get('last_name'),
                 email=post_data.get('email'),
