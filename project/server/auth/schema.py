@@ -65,6 +65,6 @@ class UserSchema(Schema):
     registered_on = fields.DateTime(dump_only=True)
 
     @post_load
-    def make_user(self, data):
+    def make_user(self, data):  # pylint: disable=R0201
         """Receives dictionary of deserialized data"""
         return User(**data)

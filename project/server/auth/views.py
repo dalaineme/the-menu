@@ -16,7 +16,7 @@ USER_SCHEMA = UserSchema()
 class RegisterAPI(MethodView):
     """User Registration resource"""
 
-    def post(self):
+    def post(self):  # pylint: disable=R0201
         """
         file: documentation/register.yml
         """
